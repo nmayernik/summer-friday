@@ -35,6 +35,8 @@ export function ClickSpark({ children, className = "" }: ClickSparkProps) {
       const rect = container.getBoundingClientRect();
       canvas.width = rect.width;
       canvas.height = rect.height;
+      canvas.style.width = rect.width + 'px';
+      canvas.style.height = rect.height + 'px';
     };
 
     resizeCanvas();
@@ -54,7 +56,7 @@ export function ClickSpark({ children, className = "" }: ClickSparkProps) {
           ctx.globalAlpha = spark.life;
           ctx.fillStyle = "#FCE483"; // Using your highlight color
           ctx.beginPath();
-          ctx.arc(spark.x, spark.y, 2, 0, Math.PI * 2);
+          ctx.arc(spark.x, spark.y, 4, 0, Math.PI * 2);
           ctx.fill();
         } else {
           sparksRef.current.splice(index, 1);
@@ -72,10 +74,12 @@ export function ClickSpark({ children, className = "" }: ClickSparkProps) {
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
 
+      console.log('Click detected at:', x, y); // Debug log
+
       // Create sparks
-      for (let i = 0; i < 8; i++) {
-        const angle = (Math.PI * 2 * i) / 8;
-        const velocity = 2 + Math.random() * 2;
+      for (let i = 0; i < 12; i++) {
+        const angle = (Math.PI * 2 * i) / 12;
+        const velocity = 3 + Math.random() * 3;
         
         sparksRef.current.push({
           x,
@@ -83,7 +87,7 @@ export function ClickSpark({ children, className = "" }: ClickSparkProps) {
           vx: Math.cos(angle) * velocity,
           vy: Math.sin(angle) * velocity,
           life: 1,
-          decay: 0.02,
+          decay: 0.015,
         });
       }
 
@@ -108,7 +112,11 @@ export function ClickSpark({ children, className = "" }: ClickSparkProps) {
       <canvas
         ref={canvasRef}
         className="absolute inset-0 pointer-events-none"
-        style={{ zIndex: 10 }}
+        style={{ 
+          zIndex: 10,
+          width: '100%',
+          height: '100%'
+        }}
       />
       {children}
     </div>
