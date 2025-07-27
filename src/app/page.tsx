@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function Home() {
 
   return (
-    <main className="max-w-screen-sm mx-auto px-4 md:px-0 py-12 space-y-14 text-primary">
+    <main className="max-w-screen-sm mx-auto px-4 md:px-0 py-10 space-y-14 text-primary text-lg">
       <div className="space-y-0.5">
           <h1 className="font-semibold">Nick Mayernik</h1>
       </div>
